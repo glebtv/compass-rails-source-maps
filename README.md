@@ -9,6 +9,7 @@ That gem doesn't work as-is with compass as compass-rails patches default sass\s
 ## Installation
 
 Add this line to your application's Gemfile:
+
     group :development do
       gem 'compass-rails-source-maps'
     end
