@@ -12,12 +12,11 @@ module Sprockets
         FileUtils.cp(file, ::Rails.root.join("public", SOURCE_MAPS_DIRECTORY, File.basename(file)))
       end
     end
-    p 'patch-sm'
+
     def evaluate(context, locals, &block)
-      p 'eval'
       cache_store = SassCacheStore.new(context.environment)
       paths  = context.environment.paths.map { |path| CompassRails::SpriteImporter.new(context, path) }
-      paths += context.environment.paths.map { |path| SassImporter.new(context, path) }
+      paths += context.environment.paths.map { |path| CompassRailsSourceMaps::SassImporter.new(context, path) }
       paths += ::Rails.application.config.sass.load_paths
 
       options = CompassRails.sass_config.merge({
@@ -29,7 +28,7 @@ module Sprockets
         cache:               ::Rails.application.config.assets.debug,
         line_numbers:        ::Rails.application.config.sass.line_numbers,
         line_comments:       ::Rails.application.config.sass.line_comments,
-        importer:            SassImporter.new(context, context.pathname),
+        importer:            CompassRailsSourceMaps::SassImporter.new(context, context.pathname),
         load_paths:          paths,
         sprockets:           {
           context:     context,
