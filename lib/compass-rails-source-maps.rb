@@ -1,3 +1,5 @@
+SOURCE_MAPS_DIRECTORY = "assets/source_maps"
+
 require 'sprockets'
 require 'fileutils'
 require 'compass-rails'

@@ -1,6 +1,4 @@
 Sass::Rails::SassTemplate.class_eval do
-  SOURCE_MAPS_DIRECTORY = "assets/source_maps"
-
   def write_output(text, destination)
     FileUtils.mkdir_p(::Rails.root.join("public", SOURCE_MAPS_DIRECTORY))
     File.open(destination, 'wb') { |file| file.write(text) }
