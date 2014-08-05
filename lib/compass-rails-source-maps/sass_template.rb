@@ -12,6 +12,7 @@ Sass::Rails::SassTemplate.class_eval do
 
   alias_method :base_evaluate, :evaluate
   def evaluate(context, locals, &block)
+    #raise 'test'
     if self.class.name == 'CompassRails::SpriteImporter'
       return base_evaluate(context, locals, &block)
     end
