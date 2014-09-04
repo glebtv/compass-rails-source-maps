@@ -33,8 +33,9 @@ module CompassRailsSourceMaps
 
     def self._load(args)
       env = ::Rails.application.assets
-      context = env.context_class.new(env, args[1], args[2])
-      new(context, args[3])
+      d = Marshal.load(args)
+      context = env.context_class.new(env, d[0], d[1])
+      new(context, d[2])
     end
   end
 end
