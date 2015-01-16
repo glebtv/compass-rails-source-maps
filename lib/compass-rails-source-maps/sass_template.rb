@@ -17,8 +17,8 @@ Sass::Rails::SassTemplate.class_eval do
       return base_evaluate(context, locals, &block)
     end
     cache_store = Sprockets::SassCacheStore.new(context.environment)
-    paths  = context.environment.paths.map { |path| CompassRails::SpriteImporter.new(context, path) }
-    paths += context.environment.paths.map { |path| Sass::Rails::SassImporter.new(context, path) }
+    paths  = context.environment.paths.map { |path| CompassRails::SpriteImporter.new(path) }
+    paths += context.environment.paths.map { |path| Sass::Rails::SassImporter.new(path) }
     paths += ::Rails.application.config.sass.load_paths
 
     options = CompassRails.sass_config.merge({
@@ -30,7 +30,7 @@ Sass::Rails::SassTemplate.class_eval do
       cache:               ::Rails.application.config.assets.debug,
       line_numbers:        ::Rails.application.config.sass.line_numbers,
       line_comments:       ::Rails.application.config.sass.line_comments,
-      importer:            CompassRailsSourceMaps::SassImporter.new(context, context.pathname),
+      importer:            CompassRailsSourceMaps::SassImporter.new(context.pathname),
       load_paths:          paths,
       sprockets:           {
         context:     context,
