@@ -7,10 +7,6 @@ module CompassRailsSourceMaps
 
     attr_accessor :context
 
-    def initialize(context, root)
-      super(context, root)
-    end
-
     def find_relative(*args)
       engine = super
       if context && engine && (filename = engine.options[:filename])
@@ -28,7 +24,7 @@ module CompassRailsSourceMaps
     end
 
     def _dump(level)
-      Marshal.dump([@context.logical_path, @context.pathname, @root])
+      Marshal.dump([@root])
     end
 
     def self._load(args)
@@ -39,4 +35,3 @@ module CompassRailsSourceMaps
     end
   end
 end
-
